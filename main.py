@@ -5,7 +5,7 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     if 'q' in request.args:
-        return redirect("http://www.google.com/?q="+request.args.get('q'), code=302)
+        return redirect("http://www.google.com/search?q="+request.args.get('q'), code=302)
     else:
         return "Nothing to see here"
 
