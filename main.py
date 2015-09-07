@@ -7,7 +7,7 @@ def home():
     if 'q' in request.args:
         return redirect("http://www.google.com/search?q="+request.args.get('q'), code=302)
     else:
-        return "Nothing to see here"
+        return "Under Construction"
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
