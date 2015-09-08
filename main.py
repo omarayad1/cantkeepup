@@ -10,9 +10,25 @@ def home():
         return "Under Construction"
 
 def query(str):
-	if str.split(' ', 1)[0] == "ocvs":
+	try:
+		command = str.split(' ', 1)[0]
+	except Exception, e:
+		command = ""
+
+	try:
+		queryText = str.split(' ', 1)[1]
+	except Exception, e:
+		queryText = ""
+
+	if command == "ocvs":
 		return "https://github.com/Itseez/opencv/search?q=\"" + \
-		str.split(' ', 1)[1] + "\""
+			queryText + "\""
+	elif command == 's' or command == 'g':
+		return "http://www.google.com/search?q="+queryText
+	elif command == 't':
+		return "https://translate.google.com/#en/ar/"+queryText
+	elif command == 'p':
+		return "https://pastie.org"
 	else:
 		return "http://www.google.com/search?q="+str
 
