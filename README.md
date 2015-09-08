@@ -21,5 +21,5 @@ ENJOY~~!
 * `s <keywords>` or `g <keywords>` --- search using google
 * `t <keywords>` --- translate from English to Arabic using google translate
 * `p` --- redirect to pastie.org
-* `ulib g<keywords>` --- search AUC library
+* `ulib <keywords>` --- search AUC library
 * `<keywords>` --- search using google (this is the default case by the way)
