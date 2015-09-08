@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import request, Flask, redirect
 import os
 app = Flask(__name__)
@@ -21,7 +22,7 @@ def query(str):
 		queryText = ""
 
 	if command == "ocvs":
-		return "https://github.com/Itseez/opencv/search?q=\"" + \
+		return u"https://github.com/Itseez/opencv/search?utf8=✓&q=\"" + \
 			queryText + "\""
 	elif command == 's' or command == 'g':
 		return "http://www.google.com/search?q=" + queryText
