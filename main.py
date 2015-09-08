@@ -24,11 +24,14 @@ def query(str):
 		return "https://github.com/Itseez/opencv/search?q=\"" + \
 			queryText + "\""
 	elif command == 's' or command == 'g':
-		return "http://www.google.com/search?q="+queryText
+		return "http://www.google.com/search?q=" + queryText
 	elif command == 't':
-		return "https://translate.google.com/#en/ar/"+queryText
+		return "https://translate.google.com/#en/ar/" + queryText
 	elif command == 'p':
 		return "https://pastie.org"
+	elif command == 'ulib':
+		return "http://aucegypt.summon.serialssolutions.com/search?s.q=" + \
+			queryText
 	else:
 		return "http://www.google.com/search?q="+str
 
