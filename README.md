@@ -7,14 +7,19 @@ goto `settings` then under the `search` section press `Manage search engines`
 now we will cantkeepup here, scroll down until you find 3 empty boxes. In the
 first box `Add a new search engine` type `cantkeepup`. In the second box
 `Keyword` type `cantkeepup`. In the last box `URL with %s in place of query` 
-type `http://cantkeepup.herokuapp.com/?q=%s`. Then press enter, and make it the
-default one by pressing the `Make default` button that appears when you hover 
-of it.
+type `http://cantkeepup.herokuapp.com/?q=%s`. Then press enter, and make it 
+the default one by pressing the `Make default` button that appears when you 
+hover f it.
 
 ENJOY~~!
 
 ## How to build
-@ayad will add this part
+first of all you need both pip and python2 installed then navigate to the 
+project directory and issue the following commands:
+```sh
+$ pip install -r requirements.txt
+$ python main.py
+```
 
 ## Currently available functions
 * `ocvs  <keywords>` --- search in OpenCV codebase in github
