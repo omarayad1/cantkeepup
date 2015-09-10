@@ -1,5 +1,92 @@
-from migrate.versioning import api
-from config import SQLALCHEMY_DATABASE_URI
+# -*- coding: utf-8 -*-
 from app import db
-import os.path
+from app.models import *
+
+# create the db and the db table
 db.create_all()
+
+# insert data
+
+## groups
+db.session.add(Group("global", "Global Group"))
+
+## users
+db.session.add(User("ghooo", "Mohamed", "Ghoneim"))
+db.session.add(User("omarayad1", "Omar", "Ayad"))
+
+def getUserId(username):
+	user = User.query.filter_by(username=username).first()
+	if user is None:
+		raise Exception('username %s not found in database' % username)
+	else:
+		return user.id
+
+def getGroupId(groupname):
+	group = Group.query.filter_by(groupname=groupname).first()
+	if group is None:
+		raise Exception('groupname %s not found in database' % groupname)
+	else:
+		return group.id
+
+## commands
+### global commands
+db.session.add(Command( \
+		"s", \
+		"http://www.google.com/search?q=%s", \
+		"Google Search", \
+		getGroupId("global"), \
+		getUserId("ghooo") \
+		))
+
+db.session.add(Command( \
+		"g", \
+		"http://www.google.com/search?q=%s", \
+		"Google Search", \
+		getGroupId("global"), \
+		getUserId("ghooo") \
+		))
+
+db.session.add(Command( \
+		"t", \
+		"https://translate.google.com/#en/ar/%s", \
+		"Google Translate", \
+		getGroupId("global"), \
+		getUserId("ghooo") \
+		))
+
+db.session.add(Command( \
+		"p", \
+		"https://pastie.org", \
+		"Pastie", \
+		getGroupId("global"), \
+		getUserId("ghooo") \
+		))
+
+db.session.add(Command( \
+		"ulib", \
+		"http://aucegypt.summon.serialssolutions.com/search?utf8=✓&s.q=%s", \
+		"University Library", \
+		getGroupId("global"), \
+		getUserId("ghooo") \
+		))
+
+### ghooo's commands
+db.session.add(Command( \
+		"ocvs", \
+		"https://github.com/Itseez/opencv/search?utf8=✓&q=\"%s\"", \
+		"OpenCV Codebase", \
+		getUserId("ghooo"), \
+		getUserId("ghooo") \
+		))
+
+### omarayad1's commands
+db.session.add(Command( \
+		"batee5", \
+		"http://www.theuselessweb.com/", \
+		"Batee5", \
+		getUserId("omarayad1"), \
+		getUserId("omarayad1") \
+		))
+
+# commit the changes
+db.session.commit()
