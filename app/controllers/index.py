@@ -1,6 +1,7 @@
 from flask.views import View
 from flask import request, redirect
 from app import models, app
+import urllib
 
 @app.route('/')
 def home():
@@ -13,12 +14,14 @@ def home():
 
 		try:
 			queryText = query.split(' ', 1)[1]
+			queryText = urllib.quote(queryText.encode('utf8'), safe='')
 		except Exception, e:
 			queryText = ""
 
 		item = models.command.Command.query.filter_by(cmd_id=cmd_id).first()
 
 		if item is None:
+			query = urllib.quote(query.encode('utf8'), safe='')
 			return redirect('http://www.google.com/search?q=%s' % \
 					query, code=302)
 		else:
