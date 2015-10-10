@@ -1,21 +1,21 @@
-from flask.views import View
-from flask import request, redirect
-from app import models, app
-import urllib
+from flask.views import View # pragma: no cover
+from flask import request, redirect # pragma: no cover
+from app import models, app # pragma: no cover
+import urllib # pragma: no cover
 
-@app.route('/')
+@app.route('/') # pragma: no cover
 def home():
 	if 'q' in request.args:
 		query = request.args.get('q')
-		try:
-			cmd_id = query.split(' ', 1)[0]
-		except Exception, e:
-			cmd_id = ""
 
-		try:
-			queryText = query.split(' ', 1)[1]
+		tokens = query.split(' ', 1)
+
+		cmd_id = tokens[0]
+
+		if len(tokens) > 1:
+			queryText = tokens[1]
 			queryText = urllib.quote(queryText.encode('utf8'), safe='')
-		except Exception, e:
+		else:
 			queryText = ""
 
 		item = models.command.Command.query.filter_by(cmd_id=cmd_id).first()
