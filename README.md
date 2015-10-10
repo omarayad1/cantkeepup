@@ -1,4 +1,7 @@
 ## Cant Keep Up
+
+[![Build Status](https://travis-ci.org/omarayad1/cantkeepup.svg)](https://travis-ci.org/omarayad1/cantkeepup)
+
 This tool is made to make programmers more productive through issuing commands
 via the address bar of their favorite browser.
 
