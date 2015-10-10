@@ -4,12 +4,12 @@ via the address bar of their favorite browser.
 
 ## How to enable it in chrome
 goto `settings` then under the `search` section press `Manage search engines`
-now we will cantkeepup here, scroll down until you find 3 empty boxes. In the
-first box `Add a new search engine` type `cantkeepup`. In the second box
+now we will add cantkeepup here, scroll down until you find 3 empty boxes. In
+the first box `Add a new search engine` type `cantkeepup`. In the second box
 `Keyword` type `cantkeepup`. In the last box `URL with %s in place of query` 
 type `http://cantkeepup.herokuapp.com/?q=%s`. Then press enter, and make it 
 the default one by pressing the `Make default` button that appears when you 
-hover f it.
+hover over it.
 
 ENJOY~~!
 
@@ -20,6 +20,24 @@ project directory and issue the following commands:
 $ pip install -r requirements.txt
 $ python main.py
 ```
+
+In order to be able to develop locally at your machine make sure you are running
+your own psql server with a database named cantkeepup_dev, and having
+`virtualenvwrapper` installed, and `$VIRTUAL_ENV/bin/postactivate` contains:
+```sh
+#!/bin/zsh
+# This hook is sourced after this virtualenv is activated.
+export APP_SETTINGS=config.DevelopmentConfig
+
+# this assumes you have posgresql server installed locally, and you have
+# a db named flask_intro_dev already created.
+export DATABASE_URL=postgresql://localhost/cantkeepup_dev
+```
+
+You will need to run the 'db_create.py' once in order to populate your local db.
+```sh
+$ python db_create.py
+````
 
 ## Currently available functions
 * `ocvs  <keywords>` --- search in OpenCV codebase in github
