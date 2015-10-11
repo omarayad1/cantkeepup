@@ -33,7 +33,7 @@ your own psql server with a database named cantkeepup_dev, and having
 export APP_SETTINGS=config.DevelopmentConfig
 
 # this assumes you have posgresql server installed locally, and you have
-# a db named flask_intro_dev already created.
+# a db named cantkeepup_dev already created.
 export DATABASE_URL=postgresql://localhost/cantkeepup_dev
 ```
 
@@ -41,6 +41,14 @@ You will need to run the 'db_create.py' once in order to populate your local db.
 ```sh
 $ python db_create.py
 ````
+
+## Making changes to the database
+We are using Flask-Migrate, and it can be done in a couple of easy steps. First,
+make your changes to the models, then from the terminal issue this command:
+`python manage.py migrate` and then `python manage.py upgrade`. To check what 
+exactly happens check the function `upgrade` in the last created file in 
+`cantkeeup-directory/migrations/versions`. As for moving or deleting the data
+you have to do it yourself, either manually or automatically.
 
 ## Currently available functions
 * `ocvs  <keywords>` --- search in OpenCV codebase in github
