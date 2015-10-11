@@ -1,9 +1,16 @@
 from flask.views import View # pragma: no cover
-from flask import request, redirect # pragma: no cover
+from flask import request, redirect, Blueprint, render_template \
+		# pragma: no cover
 from app import models, app # pragma: no cover
 import urllib # pragma: no cover
 
-@app.route('/') # pragma: no cover
+home_blueprint = Blueprint(
+	'home', __name__,
+	template_folder='templates'
+) # pragma: no cover
+
+
+@home_blueprint.route('/') # pragma: no cover
 def home():
 	if 'q' in request.args:
 		query = request.args.get('q')
@@ -28,4 +35,4 @@ def home():
 			data = item.url
 			return redirect(data.replace('%s', queryText), code=302)
 	else:
-		return "Under Construction"
+		return render_template('index.html')

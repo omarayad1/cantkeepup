@@ -7,6 +7,7 @@ class Config(object):
 	DEBUG = False
 	TESTING = False
 	CSRF_ENABLED = True
+	WTF_CSRF_ENABLED = True
 	SECRET_KEY = os.environ['SECRET_KEY']
 	SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
 	SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
@@ -30,4 +31,5 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
 	DEBUG = True
 	TESTING = True
+	WTF_CSRF_ENABLED = False
 	SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
