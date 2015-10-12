@@ -7,6 +7,19 @@
 				rel="stylesheet">
 	</head>
 	<body>
+		<div>
+			{% if current_user.is_authenticated %}
+				<p align='right'> 
+					Hi {{ current_user.firstname }}!
+					Click <a href="/logout">here</a> to logout.
+				</p>
+			{% else %}
+				<p align='right'>
+					Click <a href="/register">here</a> to register.
+					Click <a href="/login">here</a> to login.
+				</p>
+			{% endif %}
+		</div>
 		<div class="container">
 			<!-- child template -->
 			{% block content %}{% endblock %}
