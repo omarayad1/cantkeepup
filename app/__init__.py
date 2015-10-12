@@ -16,9 +16,11 @@ from app.models import command, user, group
 
 from app.users.views import users_blueprint
 from app.home.views import home_blueprint
+from app.dashboard.views import dashboard_blueprint
 
 app.register_blueprint(users_blueprint)
 app.register_blueprint(home_blueprint)
+app.register_blueprint(dashboard_blueprint)
 
 from app.models import User
 

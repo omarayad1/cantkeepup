@@ -1,0 +1,41 @@
+{% extends "base.html" %} 
+
+{% block content %}
+
+<h1>Add a New Command</h1>
+<form class="form-signin" role="form" method="post" action"">
+	{{ form.csrf_token }}
+	<p>
+		{{ form.cmd_id(placeholder="cmd_id") }}
+		<span class="error">
+			{% if form.cmd_id.errors %}
+				{% for error in form.cmd_id.errors %}
+					{{ error }}
+				{% endfor %}
+			{% endif %}
+		</span>
+	</p>
+	<p>
+		{{ form.name(placeholder="name") }}
+		<span class="error">
+			{% if form.name.errors %}
+				{% for error in form.name.errors %}
+					{{ error }}
+				{% endfor %}
+			{% endif %}
+		</span>
+	</p>
+	<p>
+		{{ form.url(placeholder="url") }}
+		<span class="error">
+			{% if form.url.errors %}
+				{% for error in form.url.errors %}
+					{{ error }}
+				{% endfor %}
+			{% endif %}
+		</span>
+	</p>
+	<button class="btn btn-sm btn-success" type="submit">Add</button>
+</form>
+
+{% endblock %}

@@ -13,12 +13,12 @@ class Command(db.Model):
 
 	__table_args__ = (db.UniqueConstraint('cmd_id', 'owner'),)
 
-	def __init__(self, cmd_id, url, name, owner, creater):
+	def __init__(self, cmd_id, url, name, owner, creator):
  		self.cmd_id = cmd_id
  		self.url = url
  		self.name = name
  		self.owner = owner
- 		self.creator = creater
+ 		self.creator = creator
  		
 	def __repr__(self):
-		return '<Name %r>' % (self.name)
+		return '<Name {}>'.format(self.name)

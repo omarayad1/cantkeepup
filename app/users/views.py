@@ -31,7 +31,7 @@ def login():
 					request.form['password']):
 				login_user(user)
 				flash('You were logged in.')
-				return redirect(url_for('home.home'))
+				return redirect(url_for('dashboard.dashboard'))
 			else:
 				error = 'Invalid Credentials. Please try again.'
 	return render_template('login.html',form=form, error=error)

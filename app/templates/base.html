@@ -11,16 +11,22 @@
 			{% if current_user.is_authenticated %}
 				<p align='right'> 
 					Hi {{ current_user.firstname }}!
-					Click <a href="/logout">here</a> to logout.
+					<a href="/dashboard">Dashboard</a>
+					<a href="/logout">Logout</a>
 				</p>
 			{% else %}
 				<p align='right'>
-					Click <a href="/register">here</a> to register.
-					Click <a href="/login">here</a> to login.
+					<a href="/login">Login</a>
+					<a href="/register">Register</a>
 				</p>
 			{% endif %}
 		</div>
 		<div class="container">
+			<!-- messages -->
+			{% for message in get_flashed_messages() %}
+				{{ message }}
+			{% endfor %}
+
 			<!-- child template -->
 			{% block content %}{% endblock %}
 
@@ -28,11 +34,6 @@
 			{% if error %}
 				<p class="error"><strong>Error:</strong> {{ error }} </p>
 			{% endif %}
-
-			<!-- messages -->
-			{% for message in get_flashed_messages() %}
-				{{ message }}
-			{% endfor %}
 		</div>
 	</body>
 </html>
