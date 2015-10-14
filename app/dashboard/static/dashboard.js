@@ -33,11 +33,17 @@ function loadUserCommandsJsGrid() {
         },
 
         deleteItem: function(deletingCommand) {
+            return $.get($SCRIPT_ROOT + '/dashboard/_deleteusercommand', 
+                deletingCommand, function(data) {
+                    alert('deleted successfully');
+                }).fail(function(response, status, error) {
+                    alert('deletion Failed:\n'+response.responseText);
+                });
         }
 
     };
     window.db = db
-    
+
     $("#userCommands").jsGrid({
         height: "auto",
         width: "100%",

@@ -71,9 +71,6 @@ def updateusercommand():
 	updates = {}
 	if url is not None: updates['url'] = url
 	if name is not None: updates['name'] = name
-	print cmd_id
-	print url
-	print name
 	try:
 		db.session.query(Command).filter_by(**conditions).update(updates)
 		db.session.commit()
@@ -81,8 +78,24 @@ def updateusercommand():
 	except Exception as e:
 		return 'Unexpected Error', 400
 
-	return ''	
+	return ''
 
+@dashboard_blueprint.route('/dashboard/_deleteusercommand')
+@login_required
+def deleteusercommand():
+	cmd_id = request.args.get('cmd_id', None, type=str)
+	if cmd_id == "":
+		return 'Command ID is missing.', 400
+	conditions = {'owner':current_user.get_id(), 'cmd_id':cmd_id}
+
+	try:
+		Command.query.filter_by(**conditions).delete()
+		db.session.commit()
+		return 'success', 200
+	except Exception as e:
+		return 'Unexpected Error', 400
+
+	return ''
 
 @dashboard_blueprint.route('/dashboard/_loadusercommands')
 @login_required
