@@ -17,16 +17,15 @@ hover over it.
 ENJOY~~!
 
 ## How to build
-first of all you need both pip and python2 installed then navigate to the 
-project directory and issue the following commands:
+First of all you need both pip and python2 installed then navigate to the 
+project directory and install all the requirement:
 ```sh
 $ pip install -r requirements.txt
-$ python main.py
 ```
 
-In order to be able to develop locally at your machine make sure you are running
-your own psql server with a database named cantkeepup_dev, and having
-`virtualenvwrapper` installed, and `$VIRTUAL_ENV/bin/postactivate` contains:
+Make sure you are running your own psql server with a database named 
+cantkeepup_dev, and having `virtualenvwrapper` installed, and 
+`$VIRTUAL_ENV/bin/postactivate` contains:
 ```sh
 #!/bin/zsh
 # This hook is sourced after this virtualenv is activated.
@@ -41,6 +40,12 @@ You will need to run the 'db_create.py' once in order to populate your local db.
 ```sh
 $ python db_create.py
 ````
+
+Finally run the application:
+```sh
+$ python manage.py runserver
+```
+
 
 ## Making changes to the database
 We are using Flask-Migrate, and it can be done in a couple of easy steps. First,
