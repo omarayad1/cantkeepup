@@ -72,6 +72,14 @@ db.session.add(Command( \
 		getUserId("ghooo") \
 		))
 
+db.session.add(Command( \
+		"shorten", \
+		"https://api-ssl.bitly.com/v3/shorten?access_token=9c15127ed875236ed5a6d91bf158dceeb66cf73a&longUrl=%s&format=txt", \
+		"URL Shortner", \
+		getGroupId("global"), \
+		getUserId("ghooo") \
+		))
+
 ### ghooo's commands
 db.session.add(Command( \
 		"ocvs", \
