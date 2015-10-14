@@ -1,6 +1,8 @@
 {% extends "base.html" %} 
 
 {% block content %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('dashboard.static', filename='dashboard.css') }}"  />
+
 
 <h1>Dashboard</h1>
 <h3>Global Commands</h3>
@@ -24,24 +26,12 @@
 </table>
 
 <h3>User Commands</h3>
-<table class="table table-hover">
-	<thead>
-		<tr>
-			<th>Command ID</th>
-			<th>Name</th>
-			<th>URL</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for command in user_commands %}
-		<tr>
-			<td>{{ command.cmd_id }}</td>
-			<td>{{ command.name }}</td>
-			<td>{{ command.url }}</td>
-		</tr>
-		{% endfor %}
-	</tbody>
-</table>
+<div id="userCommands"></div>
+<script type="text/javascript" src="{{ url_for('dashboard.static', filename='dashboard.js') }}" ></script>
+<script type="text/javascript">
+    loadUserCommandsDB();
+    loadUserCommandsJsGrid();
+</script>
 <p>
 	<a href="/dashboard/addcommand">Add New Command</a>
 </p>

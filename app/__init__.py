@@ -3,6 +3,7 @@ from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.bcrypt import Bcrypt
 from flask.ext.login import LoginManager
+from flask.ext.bower import Bower
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -11,6 +12,7 @@ login_manager.init_app(app)
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
+Bower(app)
 
 from app.models import command, user, group
 
