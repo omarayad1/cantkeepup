@@ -1,5 +1,9 @@
 function loadUserCommandsDB(){
 
+}
+
+function loadUserCommandsJsGrid() {
+
     var db = {
 
         loadData: function(filter) {
@@ -19,23 +23,27 @@ function loadUserCommandsDB(){
                 });
         },
 
-        updateItem: function(updatingCommand) { },
+        updateItem: function(updatingCommand) { 
+            return $.getJSON($SCRIPT_ROOT + '/dashboard/_updateusercommand', 
+                updatingCommand, function(data) {
+                    alert('updated successfully');
+                }).fail(function(response, status, error) {
+                    alert('Update Failed:\n'+response.responseText);
+                });
+        },
 
         deleteItem: function(deletingCommand) {
         }
 
     };
     window.db = db
-}
-
-function loadUserCommandsJsGrid() {
-
+    
     $("#userCommands").jsGrid({
         height: "auto",
         width: "100%",
         inserting: true,
         filtering: false,
-        editing: false,
+        editing: true,
         sorting: false,
         paging: false,
         autoload: true,
@@ -44,14 +52,11 @@ function loadUserCommandsJsGrid() {
         deleteConfirm: "Do you really want to delete this command?",
         controller: db,
         fields: [
-            { name: "cmd_id", title: "Command ID", align: "left", type: "text", width: 50 },
+            { name: "cmd_id", title: "Command ID", editing: false, type: "text", width: 50 },
             { name: "name", title: "Name", type: "text", width: 50 },
             { name: "url", title: "URL", type: "text", width: 150 },
             { type: "control" }
-        ]
-    });
- 
-    $("#userCommands").jsGrid({
+        ],
         onItemInserting: function(args) {
             errorMsg = "";
             if(args.item.cmd_id === "")
@@ -64,6 +69,17 @@ function loadUserCommandsJsGrid() {
                 alert('Errors:\n'+errorMsg);
                 args.cancel = true;
             }
+        },
+        onItemUpdating: function(args) {
+            errorMsg = "";
+            if(args.item.name === "")
+                errorMsg += 'Name is empty!\n'
+            if(args.item.url === "")
+                errorMsg += 'URL is empty!\n'
+            if(errorMsg != "") {
+                alert('Errors:\n'+errorMsg);
+                args.cancel = true;
+            }
         }
     });
-}
+ }
