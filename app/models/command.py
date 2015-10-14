@@ -6,7 +6,7 @@ class Command(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	cmd_id = db.Column(db.String(), nullable=False)
 	url = db.Column(db.String(), nullable=False)
-	name = db.Column(db.String())
+	name = db.Column(db.String(), nullable=False)
 	owner = db.Column(db.Integer, db.ForeignKey('base_tbl.id'), nullable=False)
 	creator = db.Column(db.Integer, db.ForeignKey('user_tbl.id'), \
 			nullable=False)
