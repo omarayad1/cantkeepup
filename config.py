@@ -29,6 +29,9 @@ class DevelopmentConfig(Config):
 
 
 class TestingConfig(Config):
+	# fixing a bug with flask when testing in Travis CI
+	# src: https://github.com/jarus/flask-testing/issues/21
+	PRESERVE_CONTEXT_ON_EXCEPTION = False
 	DEBUG = True
 	TESTING = True
 	WTF_CSRF_ENABLED = False
