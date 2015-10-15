@@ -1,0 +1,25 @@
+{
+  "name": "cantkeepup",
+  "version": "1.0.0",
+  "description": "[![Build Status](https://travis-ci.org/omarayad1/cantkeepup.svg)](https://travis-ci.org/omarayad1/cantkeepup)",
+  "main": "manage.py",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omarayad1/cantkeepup.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/omarayad1/cantkeepup/issues"
+  },
+  "homepage": "https://github.com/omarayad1/cantkeepup#readme",
+  "scripts": {
+	"postinstall": "./node_modules/bower/bin/bower install"
+  }
+}
