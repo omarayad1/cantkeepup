@@ -69,3 +69,6 @@ to activate it:
 ```sh
 heroku create --buildpack https://github.com/ghooo/heroku-buildpack-python-with-bower.git
 ```
+
+Make sure to add the correct these environment variables to heroku:
+`APP_SETTINGS`, and `SECRET_KEY`
