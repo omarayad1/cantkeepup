@@ -62,3 +62,10 @@ you have to do it yourself, either manually or automatically.
 * `p` --- redirect to pastie.org
 * `ulib <keywords>` --- search AUC library
 * `<keywords>` --- search using google (this is the default case by the way)
+
+## Deployment to Heroku
+In order to install bower we have built our own buildpack, use this command
+to activate it:
+```sh
+heroku create --buildpack https://github.com/ghooo/heroku-buildpack-python-with-bower.git
+```
