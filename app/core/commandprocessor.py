@@ -1,5 +1,8 @@
 import urllib # pragma: no cover
 from app.models import Command
+from flask.ext.login import current_user
+from app.core.helpers import getGroupId
+
 class CommandProcessor:
 	def __init__(self,command):
 		self.command = command
@@ -21,7 +24,12 @@ class CommandProcessor:
 		else:
 			commandText = ""
 
-		item = Command.query.filter_by(cmd_id=cmd_id).first()
+		item = Command.query.filter_by(cmd_id=cmd_id,
+				owner=current_user.get_id()).first()
+
+		if item is None:
+			item = Command.query.filter_by(cmd_id=cmd_id,
+					owner=getGroupId('global')).first()
 
 		if item is None:
 			self.command = urllib.quote(self.command.encode('utf8'), safe='')
