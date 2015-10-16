@@ -34,9 +34,9 @@ def dashboard():
 		 # pragma: no cover
 @login_required  # pragma: no cover
 def addusercommand():
-	cmd_id = request.form.get('cmd_id', None, type=str)
-	url = request.form.get('url', None, type=str)
-	name = request.form.get('name', None, type=str)
+	cmd_id = request.form.get('cmd_id')
+	url = request.form.get('url')
+	name = request.form.get('name')
 	if cmd_id == "" or url == "" or name == "" or \
 		cmd_id is None or url is None or name is None:
 		return 'A value is missing', 400
@@ -63,9 +63,9 @@ def addusercommand():
 		 # pragma: no cover
 @login_required # pragma: no cover
 def updateusercommand():
-	cmd_id = request.form.get('cmd_id', None, type=str)
-	url = request.form.get('url', None, type=str)
-	name = request.form.get('name', None, type=str)
+	cmd_id = request.form.get('cmd_id')
+	url = request.form.get('url')
+	name = request.form.get('name')
 
 	if cmd_id == "" or url == "" or name == "" or \
 		cmd_id is None or url is None or name is None:
@@ -87,7 +87,7 @@ def updateusercommand():
 		 # pragma: no cover
 @login_required # pragma: no cover
 def deleteusercommand():
-	cmd_id = request.form.get('cmd_id', None, type=str)
+	cmd_id = request.form.get('cmd_id')
 	if cmd_id == "" or cmd_id is None:
 		return 'Command ID is missing.', 400
 	conditions = {'owner':current_user.get_id(), 'cmd_id':cmd_id}
@@ -104,9 +104,9 @@ def deleteusercommand():
 		 # pragma: no cover
 @login_required # pragma: no cover
 def loadusercommands():
-	cmd_id = request.args.get('cmd_id', None, type=str)
-	url = request.args.get('url', None, type=str)
-	name = request.args.get('name', None, type=str)
+	cmd_id = request.args.get('cmd_id')
+	url = request.args.get('url')
+	name = request.args.get('name')
 	conditions = {'owner':current_user.get_id()}
 	if cmd_id != None and cmd_id != "": conditions['cmd_id'] = cmd_id
 	if url != None and url != "": conditions['url'] = url
