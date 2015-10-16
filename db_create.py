@@ -80,6 +80,14 @@ db.session.add(Command( \
 		getUserId("ghooo") \
 		))
 
+db.session.add(Command( \
+		"map", \
+		"https://www.google.com.eg/maps/search/%s", \
+		"Google Maps", \
+		getGroupId("global"), \
+		getUserId("ghooo") \
+		))
+
 ### ghooo's commands
 db.session.add(Command( \
 		"ocvs", \
