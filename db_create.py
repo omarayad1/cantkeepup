@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from app import db
 from app.models import *
-
+from app.core.helpers import getGroupId, getUserId
 # create the db and the db table
 db.create_all()
 
@@ -15,20 +15,6 @@ db.session.add(User("ghooo", "Mohamed", "Ghoneim", "ghooo", \
 		"ghooo@cantkeepup.com"))
 db.session.add(User("omarayad1", "Omar", "Ayad", "omarayad1", \
 		"omarayad1@cantkeepup.com"))
-
-def getUserId(username):
-	user = User.query.filter_by(username=username).first()
-	if user is None:
-		raise Exception('username %s not found in database' % username)
-	else:
-		return user.id
-
-def getGroupId(groupname):
-	group = Group.query.filter_by(groupname=groupname).first()
-	if group is None:
-		raise Exception('groupname %s not found in database' % groupname)
-	else:
-		return group.id
 
 ## commands
 ### global commands
