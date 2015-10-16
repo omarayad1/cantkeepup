@@ -1,4 +1,4 @@
-from flask.ext.script import Manager
+from flask.ext.script import Manager, Command, Option
 from flask.ext.migrate import Migrate, MigrateCommand
 import os
 import unittest
@@ -17,6 +17,23 @@ def test():
 	""" Runs the tests without coverage."""
 	tests = unittest.TestLoader().discover('tests')
 	unittest.TextTestRunner(verbosity=2).run(tests)
+
+class TestSingle(Command):
+    """ Run a single test case using '-n full.test.case.path' """
+    def __init__(self, default_name=None):
+        self.default_name=default_name
+
+    def get_options(self):
+        return [
+            Option('-n', '--name', dest='name', default=self.default_name),
+        ]
+
+    def run(self, name):
+        assert(name is not None)
+        tests = unittest.TestLoader().loadTestsFromName(name)
+        unittest.TextTestRunner(verbosity=2).run(tests)
+
+manager.add_command('test_single', TestSingle)
 
 @manager.command
 def cov():
