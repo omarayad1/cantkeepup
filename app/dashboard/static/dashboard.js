@@ -15,25 +15,25 @@ function loadUserCommandsJsGrid() {
 
 
         insertItem: function(insertingCommand) {
-            return $.getJSON($SCRIPT_ROOT + '/dashboard/_addusercommand', 
+            return $.post($SCRIPT_ROOT + '/dashboard/_addusercommand', 
                 insertingCommand, function(data) {
                     alert('added successfully');
-                }).fail(function(response, status, error) {
+                }, "json").fail(function(response, status, error) {
                     alert('Insertion Failed:\n'+response.responseText);
                 });
         },
 
         updateItem: function(updatingCommand) { 
-            return $.getJSON($SCRIPT_ROOT + '/dashboard/_updateusercommand', 
+            return $.post($SCRIPT_ROOT + '/dashboard/_updateusercommand', 
                 updatingCommand, function(data) {
                     alert('updated successfully');
-                }).fail(function(response, status, error) {
+                }, "json").fail(function(response, status, error) {
                     alert('Update Failed:\n'+response.responseText);
                 });
         },
 
         deleteItem: function(deletingCommand) {
-            return $.get($SCRIPT_ROOT + '/dashboard/_deleteusercommand', 
+            return $.post($SCRIPT_ROOT + '/dashboard/_deleteusercommand', 
                 deletingCommand, function(data) {
                     alert('deleted successfully');
                 }).fail(function(response, status, error) {

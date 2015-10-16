@@ -1,11 +1,12 @@
 from flask import Blueprint, render_template, flash, url_for, redirect, \
 		jsonify # pragma: no cover
-from flask.ext.login import login_required, current_user, request
-from app.models import Command, Group
-from forms import CommandForm
-from app import db
-from app.core.helpers import queryAllToJson, objectToJson
-from sqlalchemy.exc import IntegrityError
+from flask.ext.login import login_required, current_user, request \
+		 # pragma: no cover
+from app.models import Command, Group  # pragma: no cover
+from forms import CommandForm # pragma: no cover
+from app import db # pragma: no cover
+from app.core.helpers import queryAllToJson, objectToJson # pragma: no cover
+from sqlalchemy.exc import IntegrityError # pragma: no cover
 
 ################
 #### config ####
@@ -22,20 +23,22 @@ dashboard_blueprint = Blueprint(
 #### routes ####
 ################
 
-@dashboard_blueprint.route('/dashboard')
-@login_required
+@dashboard_blueprint.route('/dashboard') # pragma: no cover
+@login_required # pragma: no cover
 def dashboard():
 	global_group = Group.query.filter_by(groupname='global').first()
 	global_commands = Command.query.filter_by(owner=global_group.id)
 	return render_template('dashboard.html', global_commands=global_commands)
 
-@dashboard_blueprint.route('/dashboard/_addusercommand')
-@login_required
+@dashboard_blueprint.route('/dashboard/_addusercommand', methods=['POST']) \
+		 # pragma: no cover
+@login_required  # pragma: no cover
 def addusercommand():
-	cmd_id = request.args.get('cmd_id', None, type=str)
-	url = request.args.get('url', None, type=str)
-	name = request.args.get('name', None, type=str)
-	if cmd_id == "" or url == "" or name == "":
+	cmd_id = request.form.get('cmd_id', None, type=str)
+	url = request.form.get('url', None, type=str)
+	name = request.form.get('name', None, type=str)
+	if cmd_id == "" or url == "" or name == "" or \
+		cmd_id is None or url is None or name is None:
 		return 'A value is missing', 400
 
 	try:
@@ -50,23 +53,24 @@ def addusercommand():
 		db.session.commit()
 		return objectToJson(command), 200
 	except IntegrityError:
+		db.session.rollback()
 		return 'Command ID already exists', 400
 	except Exception as e:
+		db.session.rollback()
 		return 'Unexpected Error', 400
 
-	return ''
-
-
-
-@dashboard_blueprint.route('/dashboard/_updateusercommand')
-@login_required
+@dashboard_blueprint.route('/dashboard/_updateusercommand', methods=['POST']) \
+		 # pragma: no cover
+@login_required # pragma: no cover
 def updateusercommand():
-	cmd_id = request.args.get('cmd_id', None, type=str)
-	url = request.args.get('url', None, type=str)
-	name = request.args.get('name', None, type=str)
+	cmd_id = request.form.get('cmd_id', None, type=str)
+	url = request.form.get('url', None, type=str)
+	name = request.form.get('name', None, type=str)
 
-	if cmd_id == "" or url == "" or name == "":
+	if cmd_id == "" or url == "" or name == "" or \
+		cmd_id is None or url is None or name is None:
 		return 'A value is missing', 400
+
 	conditions = {'owner':current_user.get_id(), 'cmd_id':cmd_id}
 	updates = {}
 	if url is not None: updates['url'] = url
@@ -76,15 +80,15 @@ def updateusercommand():
 		db.session.commit()
 		return objectToJson(Command.query.filter_by(**conditions).first()), 200
 	except Exception as e:
+		db.session.rollback()
 		return 'Unexpected Error', 400
 
-	return ''
-
-@dashboard_blueprint.route('/dashboard/_deleteusercommand')
-@login_required
+@dashboard_blueprint.route('/dashboard/_deleteusercommand', methods=['POST']) \
+		 # pragma: no cover
+@login_required # pragma: no cover
 def deleteusercommand():
-	cmd_id = request.args.get('cmd_id', None, type=str)
-	if cmd_id == "":
+	cmd_id = request.form.get('cmd_id', None, type=str)
+	if cmd_id == "" or cmd_id is None:
 		return 'Command ID is missing.', 400
 	conditions = {'owner':current_user.get_id(), 'cmd_id':cmd_id}
 
@@ -93,29 +97,29 @@ def deleteusercommand():
 		db.session.commit()
 		return 'success', 200
 	except Exception as e:
+		db.session.rollback()
 		return 'Unexpected Error', 400
 
-	return ''
-
-@dashboard_blueprint.route('/dashboard/_loadusercommands')
-@login_required
+@dashboard_blueprint.route('/dashboard/_loadusercommands') \
+		 # pragma: no cover
+@login_required # pragma: no cover
 def loadusercommands():
 	cmd_id = request.args.get('cmd_id', None, type=str)
 	url = request.args.get('url', None, type=str)
 	name = request.args.get('name', None, type=str)
 	conditions = {'owner':current_user.get_id()}
-	if cmd_id != None: conditions['cmd_id'] = cmd_id
-	if url != None: conditions['url'] = url
-	if name != None: conditions['name'] = name
+	if cmd_id != None and cmd_id != "": conditions['cmd_id'] = cmd_id
+	if url != None and url != "": conditions['url'] = url
+	if name != None and name != "": conditions['name'] = name
 	try:
 		return queryAllToJson(Command,conditions), 200
 	except Exception as e:
+		db.session.rollback()
 		return 'Unexpected Error', 400
 
-	return ''
-
-@dashboard_blueprint.route('/dashboard/addcommand', methods=['GET', 'POST'])
-@login_required
+@dashboard_blueprint.route('/dashboard/addcommand', methods=['GET', 'POST']) \
+		 # pragma: no cover
+@login_required # pragma: no cover
 def addcommands():
 	form = CommandForm()
 	if request.method == 'POST':
