@@ -5,6 +5,7 @@ from app.models import User # pragma: no cover
 from app import bcrypt, db, app # pragma: no cover
 from flask.ext.login import login_user, login_required, logout_user \
 		 # pragma: no cover
+from datetime import timedelta # pragma: no cover
 
 ################
 #### config ####
