@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect, render_template, request, url_for, \
-		flash # pragma: no cover
+		flash, session # pragma: no cover
 from forms import LoginForm, RegisterForm # pragma: no cover
 from app.models import User # pragma: no cover
 from app import bcrypt, db # pragma: no cover
@@ -30,6 +30,7 @@ def login():
 			if user is not None and bcrypt.check_password_hash(user.password, \
 					request.form['password']):
 				login_user(user)
+				session.permanent = True
 				flash('You were logged in.')
 				return redirect(url_for('dashboard.dashboard'))
 			else:
