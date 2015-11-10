@@ -2,7 +2,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, \
 		flash, session # pragma: no cover
 from forms import LoginForm, RegisterForm # pragma: no cover
 from app.models import User # pragma: no cover
-from app import bcrypt, db # pragma: no cover
+from app import bcrypt, db, app # pragma: no cover
 from flask.ext.login import login_user, login_required, logout_user \
 		 # pragma: no cover
 
@@ -31,6 +31,7 @@ def login():
 					request.form['password']):
 				login_user(user)
 				session.permanent = True
+				app.permanent_session_lifetime = timedelta(days=3650)
 				flash('You were logged in.')
 				return redirect(url_for('dashboard.dashboard'))
 			else:
